@@ -1,0 +1,13 @@
+MIT-LICENSE
+README.rdoc
+Rakefile
+TODO
+lib
+lib/clieop
+lib/clieop.rb
+lib/clieop/batch.rb
+lib/clieop/file.rb
+lib/clieop/record.rb
+test
+test/clieop_writer_test.rb
+test/tasks.rake
