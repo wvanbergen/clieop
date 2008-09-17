@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name    = 'clieop'
-  s.version = '0.0.0'
-  s.date    = '2008-09-16'
+  s.version = '0.1.0'
+  s.date    = '2008-09-17'
   
   s.summary = "A pure Ruby implementation to write CLIEOP files"
   s.description = "This library is a pure Ruby, MIT licensed implementation of the CLIEOP03 transaction format. CLIEOP03 can be used to communicate direct debt transactions with your (Dutch) bank."
