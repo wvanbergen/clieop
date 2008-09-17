@@ -7,35 +7,37 @@ task :default => :test
 
 namespace :gem do
 
-  # desc "Sets the version and date of the scoped_search gem. Requires the VERSION environment variable."
-  # task :version => [:manifest] do
-  #   
-  #   require 'date'
-  #   
-  #   new_version = ENV['VERSION']
-  #   raise "VERSION is required" unless /\d+(\.\d+)*/ =~ new_version
-  #   
-  #   spec_file = Dir['*.gemspec'].first
-  #   
-  #   spec = File.read(spec_file)
-  #   spec.gsub!(/^(\s*s\.version\s*=\s*)('|")(.+)('|")(\s*)$/) { "#{$1}'#{new_version}'#{$5}" }
-  #   spec.gsub!(/^(\s*s\.date\s*=\s*)('|")(.+)('|")(\s*)$/) { "#{$1}'#{Date.today.strftime('%Y-%m-%d')}'#{$5}" }    
-  #   File.open(spec_file, 'w') { |f| f << spec }
-  # end
-  # 
-  # task :tag => [:version] do
-  #   
-  #   new_version = ENV['VERSION']
-  #   raise "VERSION is required" unless /\d+(\.\d+)*/ =~ new_version
-  #       
-  #   sh "git add scoped_search.gemspec .manifest"
-  #   sh "git commit -m \"Set gem version to #{new_version}\""
-  #   sh "git push origin"    
-  #   sh "git tag -a \"scoped_search-#{new_version}\" -m \"Tagged version #{new_version}\""
-  #   sh "git push --tags"
-  # end
+  desc "Sets the version and date of the clieop gem. Requires the VERSION environment variable."
+  task :version => [:manifest] do
+    
+    require 'date'
+    
+    new_version = ENV['VERSION']
+    raise "VERSION is required" unless /\d+(\.\d+)*/ =~ new_version
+    
+    spec_file = Dir['*.gemspec'].first
+    
+    spec = File.read(spec_file)
+    spec.gsub!(/^(\s*s\.version\s*=\s*)('|")(.+)('|")(\s*)$/) { "#{$1}'#{new_version}'#{$5}" }
+    spec.gsub!(/^(\s*s\.date\s*=\s*)('|")(.+)('|")(\s*)$/) { "#{$1}'#{Date.today.strftime('%Y-%m-%d')}'#{$5}" }    
+    File.open(spec_file, 'w') { |f| f << spec }
+  end
+  
+  task :tag => [:version] do
+    
+    new_version = ENV['VERSION']
+    raise "VERSION is required" unless /\d+(\.\d+)*/ =~ new_version
+    
+    spec_file = Dir['*.gemspec'].first
+        
+    sh "git add #{spec_file} .manifest"
+    sh "git commit -m \"Set gem version to #{new_version}\""
+    sh "git push origin"    
+    sh "git tag -a \"clieop-#{new_version}\" -m \"Tagged version #{new_version}\""
+    sh "git push --tags"
+  end
 
-  desc "Builds a ruby gem for scoped_search"
+  desc "Builds a ruby gem for the CLIEOP library"
   task :build => [:manifest] do
     spec_file = Dir['*.gemspec'].first
     system "gem build #{spec_file}"
