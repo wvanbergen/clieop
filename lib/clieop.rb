@@ -1,4 +1,4 @@
 require 'date'
-require File.dirname(__FILE__) + '/clieop/record.rb'
-require File.dirname(__FILE__) + '/clieop/file.rb'
-require File.dirname(__FILE__) + '/clieop/batch.rb'
+require 'clieop/record.rb'
+require 'clieop/file.rb'
+require 'clieop/batch.rb'
