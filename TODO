@@ -1,6 +1,0 @@
-- Add a Clieop::Transaction class
-- Implement CLIEOP03 reader
-- Add unit tests
-- Test with additional banking software, both invoice and payment batches
-
-Contact willem AT vanbergen DOT org if you want to hack on the CLIEOP library.
