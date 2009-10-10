@@ -1,22 +1,26 @@
 = CLIEOP
 
-This library is a pure Ruby implementation of the CLIEOP03 format. Currently, it only supports writing
-CLIEOP files with accounts receivable transactions. Accounts payable transactions, and reading existing
-CLIEOP files is planned to be supported
+This library is a pure Ruby implementation of the *CLIEOP03* format. Currently,
+it only supports writing CLIEOP files with accounts receivable transactions.
+Accounts payable transactions, and reading existing CLIEOP files is planned to be
+supported
 
 This library is licensed under the MIT license.
 
 == CLIEOP format
 
-CLIEOP03 is a file format that is used for communication about cash transaction between bank accounts. 
-It is mainly used in the Netherlands and is supported by the banking software package of the main
-banks. CLIEOP supports transactions in both directions: accounts payable and accounts receivable. 
-For accounts receivable, you need proper authorization from your bank.
+CLIEOP03 is a file format that is used for communication about cash transaction
+between bank accounts. It is used in the Netherlands and is supported by the
+banking software packages of the main banks. CLIEOP supports transactions in both
+directions: accounts payable and accounts receivable. For accounts receivable,
+you need proper authorization from your bank.
 
 For more information about the CLIEOP file format, see:
 http://www.ingbank.nl/ing/downloadables/eclieop1.pdf
 
 == Usage
 
-You can create a file (<tt>Clieop::File</tt>), which can contain one or more batches (<tt>Clieop::Batch</tt>) 
-consisting of one or more records (<tt>Clieop::Record</tt>). There are different rcord types.
+Run <tt>gem install clieop -s http://gemcutter.org</tt> to install the gem.
+
+See the project's wiki at http://wiki.github.com/wvanbergen/clieop for an example
+creating and writing a direct debt batch file.
