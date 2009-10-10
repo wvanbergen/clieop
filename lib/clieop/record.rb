@@ -1,5 +1,5 @@
 module Clieop
-  
+
   class Record
 
     TYPE_DEFINITIONS = {
@@ -10,26 +10,26 @@ module Clieop
             [:filename, :alpha, 8, 'CLIEOP03'],
       			[:sender_identification, :alpha, 5],
       			[:file_identification, :alpha, 4],
-      			[:duplicate_code, :numeric, 1, 1]      
+      			[:duplicate_code, :numeric, 1, 1]
           ],
         :file_footer => [
             [:record_code, :numeric, 4, 9999],
-            [:record_variant, :alpha, 1, 'A'],     
+            [:record_variant, :alpha, 1, 'A'],
           ],
         :batch_header => [
             [:record_code, :numeric, 4, 10],
-            [:record_variant, :alpha, 1, 'B'],   
+            [:record_variant, :alpha, 1, 'B'],
             [:transaction_group, :alpha, 2],
             [:acount_nr, :numeric, 10],
             [:serial_nr, :numeric, 4],
-            [:currency, :alpha, 3, 'EUR']     
+            [:currency, :alpha, 3, 'EUR']
           ],
         :batch_footer => [
             [:record_code, :numeric, 4, 9990],
-            [:record_variant, :alpha, 1, 'A'],  
-            [:total_amount, :numeric, 18],   
+            [:record_variant, :alpha, 1, 'A'],
+            [:total_amount, :numeric, 18],
             [:account_checksum, :numeric, 10],
-            [:tranasction_count, :numeric, 7],    
+            [:tranasction_count, :numeric, 7],
           ],
         :batch_description => [
             [:record_code, :numeric, 4, 20],
@@ -71,25 +71,25 @@ module Clieop
             [:record_code, :numeric, 4, 160],
             [:record_variant, :alpha, 1, 'A'],
             [:description, :alpha, 32],
-          ],    
+          ],
       }
 
     attr_accessor :definition, :data
-    
+
     def initialize record_type, record_data = {}
-      
+
       # load record definition
       raise "Unknown record type" unless Clieop::Record::TYPE_DEFINITIONS[record_type.to_sym]
       @definition = Clieop::Record::TYPE_DEFINITIONS[record_type.to_sym]
-      
+
       # set default values according to definition
       @data = {}
       @definition.each { |field| @data[field[0]] = field[3] if field[3] }
-  
+
       # set values for all the provided data
       record_data.each { |field, value| @data[field] = value }
     end
-    
+
     def to_clieop
       line = ""
       #format each field
@@ -105,11 +105,11 @@ module Clieop
       # fill each line with spaces up to 50 characters and close with a CR/LF
       line.ljust(50) + "\r\n"
     end
-    
+
     def to_s
       self.to_clieop
     end
-    
+
   end
-  
+
 end

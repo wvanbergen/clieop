@@ -1,10 +1,10 @@
 module Clieop
-  
+
   class File
-    
+
     attr_accessor :batches
     attr_reader   :file_info
-    
+
     def initialize(file_info = {})
       file_info[:date] = Date.today unless file_info[:date]
       file_info[:date] = file_info[:date].strftime('%d%m%y') if file_info[:date].respond_to?(:strftime)
@@ -18,12 +18,15 @@ module Clieop
       @batches.each { |batch| clieop_data << batch.to_clieop }
       clieop_data << Clieop::Record.new(:file_footer).to_clieop
     end
-      
+
+    # Alias for to_clieop
+    alias :to_s :to_clieop
+
     def payment_batch(options)
       @payment << Clieop::Batch.payment_batch(options, block)
-      yield(@batches.last) if block_given?      
+      yield(@batches.last) if block_given?
       return @batches.last
-    end      
+    end
 
     def invoice_batch(options)
       @batches << Clieop::Batch.invoice_batch(options)
@@ -31,9 +34,10 @@ module Clieop
       return @batches.last
     end
 
-    # Alias for to_clieop
-    def to_s
-      self.to_clieop
+    def save(filename)
+      File.open(filename, 'w') do |f|
+        f.write(self.to_clieop)
+      end
     end
-  end 
+  end
 end
