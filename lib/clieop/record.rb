@@ -8,9 +8,9 @@ module Clieop
             [:record_variant, :alpha, 1, 'A'],
             [:date, :numeric, 6],
             [:filename, :alpha, 8, 'CLIEOP03'],
-      			[:sender_identification, :alpha, 5],
-      			[:file_identification, :alpha, 4],
-      			[:duplicate_code, :numeric, 1, 1]
+            [:sender_identification, :alpha, 5],
+            [:file_identification, :alpha, 4],
+            [:duplicate_code, :numeric, 1, 1]
           ],
         :file_footer => [
             [:record_code, :numeric, 4, 9999],
@@ -95,10 +95,10 @@ module Clieop
       #format each field
       @definition.each do |field|
         fmt = '%'
-  			fmt << (field[1] == :numeric ? '0' : '-')
-  			fmt << (field[2].to_s)
-  			fmt << (field[1] == :numeric ? 'd' : 's')
-  			raw_data = (field[1] == :numeric) ? @data[field[0]].to_i : @data[field[0]]
+        fmt << (field[1] == :numeric ? '0' : '-')
+        fmt << (field[2].to_s)
+        fmt << (field[1] == :numeric ? 'd' : 's')
+        raw_data = (field[1] == :numeric) ? @data[field[0]].to_i : @data[field[0]]
         value = sprintf(fmt, raw_data)
         line << (field[1] == :numeric ? value[0 - field[2], field[2]] : value[0, field[2]])
       end
