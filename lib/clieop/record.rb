@@ -47,7 +47,7 @@ module Clieop
         :transaction_info => [
             [:record_code, :numeric, 4, 100],
             [:record_variant, :alpha, 1, 'A'],
-            [:transaction_type, :numeric, 4, 1002],
+            [:transaction_type, :alpha, 4, "1002"],
             [:amount, :numeric, 12],
             [:from_account, :numeric, 10],
             [:to_account, :numeric, 10],
@@ -65,7 +65,7 @@ module Clieop
         :transaction_reference => [
             [:record_code, :numeric, 4, 150],
             [:record_variant, :alpha, 1, 'A'],
-            [:reference_number, :numeric, 16],
+            [:reference_number, :alpha, 16],
           ],
         :transaction_description => [
             [:record_code, :numeric, 4, 160],
