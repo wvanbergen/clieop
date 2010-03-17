@@ -78,7 +78,7 @@ module Clieop
 
       # generate batch footer record including some checks
       batch_data << Clieop::Record.new(:batch_footer, :tranasction_count => @transactions.length,
-                        :total_amount => total_amount, :account_checksum => total_account.to_s[0..10]).to_clieop
+                        :total_amount => total_amount, :account_checksum => account_checksum(total_account)).to_clieop
 
     end
 
@@ -96,6 +96,12 @@ module Clieop
     def self.invoice_batch(batch_info = {})
       batch_info[:transaction_group] ||= 10
       Clieop::Batch.new(batch_info)
+    end
+
+    # the checksum on the total of accounts is in fact the last 10 chars of total amount
+    def account_checksum(total)
+      total.to_s.split('').last(10).join('') # ruby 1.8.6
+      # total.to_s.chars.last(10).join('')     # ruby 1.8.7
     end
 
   end
