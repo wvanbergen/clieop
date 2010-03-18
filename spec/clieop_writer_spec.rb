@@ -1,6 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
-
-require 'clieop'
+require 'spec_helper'
 
 describe Clieop do
 
