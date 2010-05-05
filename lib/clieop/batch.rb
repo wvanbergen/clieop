@@ -70,7 +70,7 @@ module Clieop
 
         # split discription into lines and make a record for the first 4 lines
         unless tr[:description].nil? || tr[:description] == ''
-          tr[:description].split(/\r?\n/)[0, 4].each do |line|
+          tr[:description].split(/\r?\n/)[0, 4].each do |line| # FIXME raise warning when line is longer than 32 chars/description longer than 4 lines
             batch_data << Clieop::Record.new(:transaction_description, :description => line.strip).to_s unless line == ''
           end
         end
