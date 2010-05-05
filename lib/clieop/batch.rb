@@ -48,16 +48,16 @@ module Clieop
       # add transactions to batch
       @transactions.each do |tr|
 
-        # update checksums
-        total_account += tr[:account_nr].to_i
-        total_amount  += (tr[:amount].to_f * 100).truncate
-
         # prepare data for this transaction's records
         transaction_type = tr[:transaction_type] || (@batch_info[:transaction_group] == 10 ? 1002 : 0)
         to_account       = @batch_info[:transaction_group] == 10 ? @batch_info[:account_nr] : tr[:account_nr]
         from_account     = @batch_info[:transaction_group] == 10 ? tr[:account_nr] : @batch_info[:account_nr]
-        amount_in_cents  = (tr[:amount].to_f * 100).truncate
+        amount_in_cents  = (tr[:amount] * 100).round.to_i
         name_record      = @batch_info[:transaction_group] == 10 ? :invoice_name : :payment_name
+
+        # update checksums
+        total_account += tr[:account_nr].to_i
+        total_amount  += amount_in_cents
 
         # generate transaction record
         batch_data << Clieop::Record.new(:transaction_info,
