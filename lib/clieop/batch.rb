@@ -77,7 +77,7 @@ module Clieop
       end
 
       # generate batch footer record including some checks
-      batch_data << Clieop::Record.new(:batch_footer, :tranasction_count => @transactions.length,
+      batch_data << Clieop::Record.new(:batch_footer, :transaction_count => @transactions.length,
                         :total_amount => total_amount, :account_checksum => account_checksum(total_account)).to_clieop
 
     end

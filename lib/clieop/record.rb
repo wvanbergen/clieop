@@ -29,7 +29,7 @@ module Clieop
             [:record_variant, :alpha, 1, 'A'],
             [:total_amount, :numeric, 18],
             [:account_checksum, :numeric, 10],
-            [:tranasction_count, :numeric, 7],
+            [:transaction_count, :numeric, 7],
           ],
         :batch_description => [
             [:record_code, :numeric, 4, 20],
@@ -72,7 +72,7 @@ module Clieop
             [:record_variant, :alpha, 1, 'A'],
             [:description, :alpha, 32],
           ],
-      }
+    }
 
     attr_accessor :definition, :data
 
