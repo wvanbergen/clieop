@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.summary     = "A pure Ruby implementation to write CLIEOP files"
   s.description = "This library is a pure Ruby, MIT licensed implementation of the CLIEOP03 transaction format. CLIEOP03 can be used to communicate direct debt transactions with your (Dutch) bank."
 
-  s.authors  = ['Willem van Bergen']
-  s.email    = ['willem@vanbergen.org']
+  s.authors  = ['Willem van Bergen', 'Leon Berenschot']
+  s.email    = ['willem@vanbergen.org', 'LeipeLeon@gmail.com']
   s.homepage = 'http://github.com/wvanbergen/clieop/wikis'
 
   # Do not set files and test_files yourself, this will be done automatically
