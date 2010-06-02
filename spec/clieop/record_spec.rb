@@ -15,13 +15,22 @@ describe Clieop::Record do
     record.to_clieop.should match(/9999A                                             /)
   end
 
-  it "should generate :batch_header" do
+  it "should generate :batch_header for direct debit" do
     record = Clieop::Record.new(:batch_header,
       :transaction_group => 10,
       :acount_nr         => 1234567890,
       :serial_nr         => 1
     )
     record.to_clieop.should match(/0010B1012345678900001EUR                          /)
+  end
+
+  it "should generate :batch_header for payment" do
+    record = Clieop::Record.new(:batch_header,
+      :transaction_group => 0,
+      :acount_nr         => 1234567890,
+      :serial_nr         => 1
+    )
+    record.to_clieop.should match(/0010B0012345678900001EUR                          /)
   end
 
   # TODO Also do calculations

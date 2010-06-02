@@ -19,7 +19,7 @@ module Clieop
         :batch_header => [
             [:record_code, :numeric, 4, 10],
             [:record_variant, :alpha, 1, 'B'],
-            [:transaction_group, :alpha, 2],
+            [:transaction_group, :numeric, 2],
             [:acount_nr, :numeric, 10],
             [:serial_nr, :numeric, 4],
             [:currency, :alpha, 3, 'EUR']
@@ -47,7 +47,7 @@ module Clieop
         :transaction_info => [
             [:record_code, :numeric, 4, 100],
             [:record_variant, :alpha, 1, 'A'],
-            [:transaction_type, :alpha, 4, "1002"],
+            [:transaction_type, :numeric, 4, 1002],
             [:amount, :numeric, 12],
             [:from_account, :numeric, 10],
             [:to_account, :numeric, 10],
