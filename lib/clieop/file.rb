@@ -23,7 +23,7 @@ module Clieop
     alias :to_s :to_clieop
 
     def payment_batch(options)
-      @payment << Clieop::Batch.payment_batch(options, block)
+      @batches << Clieop::Batch.payment_batch(options)
       yield(@batches.last) if block_given?
       return @batches.last
     end
