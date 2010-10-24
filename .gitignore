@@ -1,3 +1,4 @@
 clieop-*.gem
 .svn/
 .DS_Store
+/.bundle/

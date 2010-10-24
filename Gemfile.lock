@@ -1,0 +1,28 @@
+PATH
+  remote: .
+  specs:
+    clieop (0.1.4)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.1.2)
+    rake (0.8.7)
+    rspec (2.0.1)
+      rspec-core (~> 2.0.1)
+      rspec-expectations (~> 2.0.1)
+      rspec-mocks (~> 2.0.1)
+    rspec-core (2.0.1)
+    rspec-expectations (2.0.1)
+      diff-lcs (>= 1.1.2)
+    rspec-mocks (2.0.1)
+      rspec-core (~> 2.0.1)
+      rspec-expectations (~> 2.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  clieop!
+  rake
+  rspec (~> 2.0)
