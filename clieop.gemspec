@@ -13,6 +13,9 @@ Gem::Specification.new do |s|
   s.email    = ['willem@vanbergen.org', 'LeipeLeon@gmail.com']
   s.homepage = 'http://github.com/wvanbergen/clieop/wikis'
 
+  s.add_development_dependency('rake')
+  s.add_development_dependency('rspec', '~> 2.0')
+  
   # Do not set files and test_files yourself, this will be done automatically
   # by the gem release script.
   s.files      = %w(spec/spec_helper.rb spec/clieop/batch_spec.rb .gitignore lib/clieop/record.rb MIT-LICENSE doc/clieop03.pdf lib/clieop/file.rb lib/clieop/batch.rb lib/clieop.rb init.rb Rakefile clieop.gemspec README.rdoc tasks/github-gem.rake spec/clieop_spec.rb spec/clieop/record_spec.rb spec/clieop/file_spec.rb)
