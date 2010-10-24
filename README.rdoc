@@ -20,7 +20,14 @@ http://www.ingbank.nl/ing/downloadables/eclieop1.pdf
 
 == Usage
 
-Run <tt>gem install clieop</tt> to install the gem.
+Run <tt>gem install clieop</tt> to install the gem or add <tt>gem 'clieop'</tt> to 
+your project's Gemfile.
 
 See the project's wiki at http://wiki.github.com/wvanbergen/clieop for an example
 creating and writing a direct debt batch file.
+
+== About
+
+This library is released under the MIT license (see <tt>MIT-LICENSE</tt>) and was
+originally written by Willem van Bergen. It is currently being maintained by
+Leon Berenschot.
