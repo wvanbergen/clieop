@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
 
   # Do not set version and date yourself, this will be done automatically
   # by the gem release script.
-  s.version = "0.2.0"
+  s.version = "0.2.1"
   s.date    = "2010-12-09"
 
   s.summary     = "A pure Ruby implementation to write CLIEOP files"
