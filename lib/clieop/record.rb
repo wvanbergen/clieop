@@ -57,11 +57,6 @@ module Clieop
             [:record_variant, :alpha, 1, 'B'],
             [:name, :alpha, 35],
           ],
-        :payment_name =>[
-            [:record_code, :numeric, 4, 170],
-            [:record_variant, :alpha, 1, 'B'],
-            [:name, :alpha, 35],
-          ],
         :transaction_reference => [
             [:record_code, :numeric, 4, 150],
             [:record_variant, :alpha, 1, 'A'],
@@ -71,6 +66,11 @@ module Clieop
             [:record_code, :numeric, 4, 160],
             [:record_variant, :alpha, 1, 'A'],
             [:description, :alpha, 32],
+          ],
+        :payment_name =>[
+            [:record_code, :numeric, 4, 170],
+            [:record_variant, :alpha, 1, 'B'],
+            [:name, :alpha, 35],
           ],
     }
 
