@@ -49,11 +49,11 @@ module Clieop
       @transactions.each do |tr|
 
         # prepare data for this transaction's records
-        transaction_type = tr[:transaction_type] || (@batch_info[:transaction_group] == 10 ? 1002 : 0)
-        to_account       = @batch_info[:transaction_group] == 10 ? @batch_info[:account_nr] : tr[:account_nr]
-        from_account     = @batch_info[:transaction_group] == 10 ? tr[:account_nr] : @batch_info[:account_nr]
+        transaction_type = tr[:transaction_type] || (transaction_is_payment? ? 1002 : 0)
+        to_account       = transaction_is_payment? ? @batch_info[:account_nr] : tr[:account_nr]
+        from_account     = transaction_is_payment? ? tr[:account_nr] : @batch_info[:account_nr]
         amount_in_cents  = (tr[:amount] * 100).round.to_i
-        name_record      = @batch_info[:transaction_group] == 10 ? :invoice_name : :payment_name
+        name_record      = transaction_is_payment? ? :invoice_name : :payment_name
 
         # update checksums
         total_account += tr[:account_nr].to_i
@@ -102,6 +102,12 @@ module Clieop
     def account_checksum(total)
       total.to_s.split('').last(10).join('') # ruby 1.8.6
       # total.to_s.chars.last(10).join('')     # ruby 1.8.7
+    end
+
+  private
+
+    def transaction_is_payment?
+      @batch_info[:transaction_group] == 10
     end
 
   end
