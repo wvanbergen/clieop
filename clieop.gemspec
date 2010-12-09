@@ -14,7 +14,8 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/wvanbergen/clieop/wikis'
 
   s.add_development_dependency('rake')
-  s.add_development_dependency('rspec', '~> 2.0')
+  s.add_development_dependency('rspec', '~> 2.2')
+  s.add_development_dependency('ZenTest', '~> 4.4')
   
   # Do not set files and test_files yourself, this will be done automatically
   # by the gem release script.
