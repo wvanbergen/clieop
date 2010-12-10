@@ -49,11 +49,10 @@ module Clieop
       @transactions.each do |tr|
 
         # prepare data for this transaction's records
-        transaction_type = tr[:transaction_type] || (@batch_info[:transaction_group] == 10 ? 1002 : 0)
-        to_account       = @batch_info[:transaction_group] == 10 ? @batch_info[:account_nr] : tr[:account_nr]
-        from_account     = @batch_info[:transaction_group] == 10 ? tr[:account_nr] : @batch_info[:account_nr]
+        transaction_type = tr[:transaction_type] || (transaction_is_payment? ? 1002 : 0)
+        to_account       = transaction_is_payment? ? @batch_info[:account_nr] : tr[:account_nr]
+        from_account     = transaction_is_payment? ? tr[:account_nr] : @batch_info[:account_nr]
         amount_in_cents  = (tr[:amount] * 100).round.to_i
-        name_record      = @batch_info[:transaction_group] == 10 ? :invoice_name : :payment_name
 
         # update checksums
         total_account += tr[:account_nr].to_i
@@ -65,7 +64,7 @@ module Clieop
                           :to_account       => to_account,       :from_account => from_account).to_clieop
 
         # generate record with transaction information
-        batch_data << Clieop::Record.new(name_record, :name => tr[:account_owner]).to_clieop
+        batch_data << Clieop::Record.new(:invoice_name, :name => tr[:account_owner]).to_clieop if transaction_is_payment?
         batch_data << Clieop::Record.new(:transaction_reference, :reference_number => tr[:reference_number]).to_clieop unless tr[:reference_number].nil?
 
         # split discription into lines and make a record for the first 4 lines
@@ -74,6 +73,8 @@ module Clieop
             batch_data << Clieop::Record.new(:transaction_description, :description => line.strip).to_s unless line == ''
           end
         end
+        batch_data << Clieop::Record.new(:payment_name, :name => tr[:account_owner]).to_clieop unless transaction_is_payment?
+
       end
 
       # generate batch footer record including some checks
@@ -102,6 +103,12 @@ module Clieop
     def account_checksum(total)
       total.to_s.split('').last(10).join('') # ruby 1.8.6
       # total.to_s.chars.last(10).join('')     # ruby 1.8.7
+    end
+
+  private
+
+    def transaction_is_payment?
+      @batch_info[:transaction_group] == 10
     end
 
   end

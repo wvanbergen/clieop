@@ -57,11 +57,6 @@ module Clieop
             [:record_variant, :alpha, 1, 'B'],
             [:name, :alpha, 35],
           ],
-        :payment_name =>[
-            [:record_code, :numeric, 4, 170],
-            [:record_variant, :alpha, 1, 'B'],
-            [:name, :alpha, 35],
-          ],
         :transaction_reference => [
             [:record_code, :numeric, 4, 150],
             [:record_variant, :alpha, 1, 'A'],
@@ -71,6 +66,11 @@ module Clieop
             [:record_code, :numeric, 4, 160],
             [:record_variant, :alpha, 1, 'A'],
             [:description, :alpha, 32],
+          ],
+        :payment_name =>[
+            [:record_code, :numeric, 4, 170],
+            [:record_variant, :alpha, 1, 'B'],
+            [:name, :alpha, 35],
           ],
     }
 
@@ -83,8 +83,7 @@ module Clieop
       @definition = Clieop::Record::TYPE_DEFINITIONS[record_type.to_sym]
 
       # set default values according to definition
-      @data = {}
-      @definition.each { |field| @data[field[0]] = field[3] if field[3] }
+      @data = @definition.inject({}) { |memo, field| memo[field[0]] = field[3] if field[3] ; memo }
 
       # set values for all the provided data
       record_data.each { |field, value| @data[field] = value }
@@ -92,15 +91,15 @@ module Clieop
 
     def to_clieop
       line = ""
-      #format each field
-      @definition.each do |field|
+      # format each field
+      @definition.each do |field, type, length, content|
         fmt = '%'
-        fmt << (field[1] == :numeric ? '0' : '-')
-        fmt << (field[2].to_s)
-        fmt << (field[1] == :numeric ? 'd' : 's')
-        raw_data = (field[1] == :numeric) ? @data[field[0]].to_i : @data[field[0]]
+        fmt << (type == :numeric ? '0' : '-')
+        fmt << (length.to_s)
+        fmt << (type == :numeric ? 'd' : 's')
+        raw_data = (type == :numeric) ? @data[field].to_i : @data[field]
         value = sprintf(fmt, raw_data)
-        line << (field[1] == :numeric ? value[0 - field[2], field[2]] : value[0, field[2]])
+        line << (type == :numeric ? value[0 - length, length] : value[0, length])
       end
       # fill each line with spaces up to 50 characters and close with a CR/LF
       line.ljust(50) + "\r\n"

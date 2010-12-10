@@ -35,7 +35,7 @@ module Clieop
     end
 
     def save(filename)
-      File.open(filename, 'w') do |f|
+      ::File.open(filename, 'w') do |f|
         f.write(self.to_clieop)
       end
     end
