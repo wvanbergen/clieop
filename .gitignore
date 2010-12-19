@@ -2,3 +2,5 @@ clieop-*.gem
 .svn/
 .DS_Store
 /.bundle/
+Gemfile.lock
+*.rbc

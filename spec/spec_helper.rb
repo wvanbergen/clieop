@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'bundler'
-Bundler.require(:default, :development)
+require 'bundler/setup'
+require 'clieop'
 
 RSpec.configure do |config|
-  
+  # nothing special
 end
