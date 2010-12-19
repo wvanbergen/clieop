@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.authors  = ['Willem van Bergen', 'Leon Berenschot']
   s.email    = ['willem@vanbergen.org', 'LeipeLeon@gmail.com']
-  s.homepage = 'http://github.com/wvanbergen/clieop/wikis'
+  s.homepage = 'http://github.com/wvanbergen/clieop/wiki'
 
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec', '~> 2.2')
