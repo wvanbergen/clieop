@@ -105,10 +105,6 @@ module Clieop
       line.ljust(50) + "\r\n"
     end
 
-    def to_s
-      self.to_clieop
-    end
-
+    alias_method :to_s, :to_clieop
   end
-
 end

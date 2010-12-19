@@ -83,9 +83,7 @@ module Clieop
 
     end
 
-    def to_s
-      self.to_clieop
-    end
+    alias_method :to_s, :to_clieop
 
     # creates a batch for payments from a given account
     def self.payment_batch(batch_info = {})
@@ -110,6 +108,5 @@ module Clieop
     def transaction_is_payment?
       @batch_info[:transaction_group] == 10
     end
-
   end
 end

@@ -20,7 +20,7 @@ module Clieop
     end
 
     # Alias for to_clieop
-    alias :to_s :to_clieop
+    alias_method :to_s, :to_clieop
 
     def payment_batch(options)
       @batches << Clieop::Batch.payment_batch(options)
