@@ -16,7 +16,7 @@ directions: accounts payable and accounts receivable. For accounts receivable,
 you need proper authorization from your bank.
 
 For more information about the CLIEOP file format, see:
-http://www.ingbank.nl/ing/downloadables/eclieop1.pdf
+http://www.equens.com/support/filelayout/index.jsp 
 
 == Usage
 
