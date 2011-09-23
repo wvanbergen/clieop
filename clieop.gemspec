@@ -3,8 +3,8 @@ Gem::Specification.new do |s|
 
   # Do not set version and date yourself, this will be done automatically
   # by the gem release script.
-  s.version = "0.2.1"
-  s.date    = "2010-12-09"
+  s.version = "0.2.2"
+  s.date    = "2011-09-23"
 
   s.summary     = "A pure Ruby implementation to write CLIEOP files"
   s.description = "This library is a pure Ruby, MIT licensed implementation of the CLIEOP03 transaction format. CLIEOP03 can be used to communicate direct debt transactions with your (Dutch) bank."
@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   
   # Do not set files and test_files yourself, this will be done automatically
   # by the gem release script.
-  s.files      = %w(.gitignore .rspec Gemfile Gemfile.lock MIT-LICENSE README.rdoc Rakefile autotest/discover.rb clieop.gemspec doc/clieop03.pdf init.rb lib/clieop.rb lib/clieop/batch.rb lib/clieop/file.rb lib/clieop/record.rb spec/clieop/batch_spec.rb spec/clieop/file_spec.rb spec/clieop/record_spec.rb spec/clieop_spec.rb spec/spec_helper.rb tasks/github-gem.rake)
+  s.files      = %w(.gitignore .infinity_test .rspec Gemfile MIT-LICENSE README.rdoc Rakefile autotest/discover.rb clieop.gemspec doc/clieop03.pdf lib/clieop.rb lib/clieop/batch.rb lib/clieop/file.rb lib/clieop/record.rb spec/clieop/batch_spec.rb spec/clieop/file_spec.rb spec/clieop/record_spec.rb spec/clieop_spec.rb spec/spec_helper.rb tasks/github-gem.rake)
   s.test_files = %w(spec/clieop/batch_spec.rb spec/clieop/file_spec.rb spec/clieop/record_spec.rb spec/clieop_spec.rb)
 end
