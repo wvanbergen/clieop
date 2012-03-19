@@ -4,3 +4,4 @@ clieop-*.gem
 /.bundle/
 Gemfile.lock
 *.rbc
+.rvmrc
