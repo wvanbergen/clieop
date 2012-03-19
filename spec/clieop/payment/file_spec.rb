@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Clieop::File do
+describe Clieop::Payment::File do
 
   context "#save" do
 
