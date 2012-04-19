@@ -4,6 +4,15 @@ module Clieop
   VERSION = "0.2.2"
 end
 
-require 'clieop/record'
-require 'clieop/file'
-require 'clieop/batch'
+unless defined?(ActiveSupport)
+  require 'core_ext/string'
+  require 'core_ext/hash'
+end
+
+require 'clieop/payment/record'
+require 'clieop/payment/file'
+require 'clieop/payment/batch'
+require 'clieop/process_info/record'
+require 'clieop/process_info/file'
+require 'clieop/process_info/batch'
+require 'clieop/process_info/transaction'

@@ -4,7 +4,7 @@ describe Clieop do
 
   it "should test basic invoice usage" do
 
-    file = Clieop::File.new
+    file = Clieop::Payment::File.new
 
     file.invoice_batch({:description => 'some description', :account_nr => 123, :account_owner => 'me'}) do |batch|
 
@@ -24,7 +24,7 @@ describe Clieop do
   end
 
   it "should format the checksum" do
-    batch = Clieop::Batch.new({:description => "Description", :account_nr => "Account Nr", :account_owner => "Account Owner" } )
+    batch = Clieop::Payment::Batch.new({:description => "Description", :account_nr => "Account Nr", :account_owner => "Account Owner" } )
     batch.account_checksum('1234567890123').should  eql('4567890123')
     batch.account_checksum('7654321').should  eql('7654321')
   end

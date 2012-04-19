@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Clieop::Batch do
+describe Clieop::Payment::Batch do
 
   before(:all) do
     @batch_info = {
@@ -11,18 +11,18 @@ describe Clieop::Batch do
   end
 
   it "should generate valid object" do
-    Clieop::Batch.new(@batch_info.dup).class.should eql(Clieop::Batch)
+    Clieop::Payment::Batch.new(@batch_info.dup).class.should eql(Clieop::Payment::Batch)
   end
 
   it "should generate a invoice batch" do
-    batch = Clieop::Batch.invoice_batch(@batch_info.dup)
-    batch.class.should eql(Clieop::Batch)
+    batch = Clieop::Payment::Batch.invoice_batch(@batch_info.dup)
+    batch.class.should eql(Clieop::Payment::Batch)
     batch.batch_info[:transaction_group].should eql(10)
   end
 
   it "should generate a payment batch" do
-    batch = Clieop::Batch.payment_batch(@batch_info.dup)
-    batch.class.should eql(Clieop::Batch)
+    batch = Clieop::Payment::Batch.payment_batch(@batch_info.dup)
+    batch.class.should eql(Clieop::Payment::Batch)
     batch.batch_info[:transaction_group].should eql(0)
   end
 
@@ -31,7 +31,7 @@ describe Clieop::Batch do
     describe "Invoice" do
 
       before do
-        @batch = Clieop::Batch.invoice_batch(@batch_info.dup)
+        @batch = Clieop::Payment::Batch.invoice_batch(@batch_info.dup)
         @batch << {
           :reference_number => "Factnr 100101",
           :account_nr       => 123456789,
@@ -69,7 +69,7 @@ describe Clieop::Batch do
     describe "Payment" do
 
       before do
-        @batch = Clieop::Batch.payment_batch(@batch_info.dup)
+        @batch = Clieop::Payment::Batch.payment_batch(@batch_info.dup)
         @batch << {
           :reference_number => "Factnr 100101",
           :account_nr       => 123456789,
