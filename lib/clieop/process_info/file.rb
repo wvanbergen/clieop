@@ -8,7 +8,7 @@ module Clieop
 
       def initialize(verwinfo_string, whiny_mode = false)
         self.records = verwinfo_string.split(Clieop::ProcessInfo::Record::LINE_SEPARATOR).map do |record_line| 
-          unless record_line.blank? || record_line == "\u001A" # skip EOF character
+          unless record_line.size < 3 # No record code available
             begin
               Clieop::ProcessInfo::Record.new(record_line)
             rescue Exception => e

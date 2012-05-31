@@ -212,7 +212,7 @@ module Clieop
       
       # Format: jjmmdd
       def self.parse_date_value attribute_line
-        Time.parse(attribute_line).send :to_date
+        Time.parse(attribute_line).send(:to_date)
       end
       
 

@@ -17,7 +17,7 @@ describe Clieop::ProcessInfo::File do
   end
   
   it "should parse file info" do
-    subject.info.should == {:filename=>"VERWINFO", :file_version=>"4.1", :date=> Time.parse('101015').to_date, :run_number=>4432, :account_nr=>123456789, :serial_nr=>2, :file_nr=>1, :batches_count=>1, :next_file_nr=>0 }
+    subject.info.should == {:filename=>"VERWINFO", :file_version=>"4.1", :date=> Time.parse('101015').send(:to_date), :run_number=>4432, :account_nr=>123456789, :serial_nr=>2, :file_nr=>1, :batches_count=>1, :next_file_nr=>0 }
   end
   
   it "should parse records" do

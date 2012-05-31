@@ -18,7 +18,7 @@ describe Clieop::ProcessInfo::Record do
   end
 
   it "should parse date values" do
-    Clieop::ProcessInfo::Record.parse_date_value('120304').should == Time.parse('120304').to_date   
+    Clieop::ProcessInfo::Record.parse_date_value('120304').should == Time.parse('120304').send(:to_date)
   end
   
   it "should properly parse the record line and set record attributes" do
