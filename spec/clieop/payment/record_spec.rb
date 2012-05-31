@@ -72,6 +72,13 @@ describe Clieop::Payment::Record do
     )
     record.to_clieop.should match(/0110BPayee                                        /)
   end
+  
+  it "should generate :invoice_city" do
+    record = Clieop::Payment::Record.new(:invoice_city,
+      :city => 'Enschede'
+    )
+    record.to_clieop.should match(/0113BEnschede                                     /)
+  end   
 
   it "should generate :payment_name" do
     record = Clieop::Payment::Record.new(:payment_name,
@@ -79,6 +86,13 @@ describe Clieop::Payment::Record do
     )
     record.to_clieop.should match(/0170BReciever                                     /)
   end
+  
+  it "should generate :payment_city" do
+    record = Clieop::Payment::Record.new(:payment_city,
+      :city => 'Enschede'
+    )
+    record.to_clieop.should match(/0173BEnschede                                     /)
+  end  
 
   it "should generate :transaction_reference" do
     record = Clieop::Payment::Record.new(:transaction_reference,

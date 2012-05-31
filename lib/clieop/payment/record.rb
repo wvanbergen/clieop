@@ -60,6 +60,11 @@ module Clieop
               [:record_variant, :alpha, 1, 'B'],
               [:name, :alpha, 35],
             ],
+          :invoice_city => [
+              [:record_code, :numeric, 4, 113],
+              [:record_variant, :alpha, 1, 'B'],
+              [:city, :alpha, 35],
+            ],            
           :transaction_reference => [
               [:record_code, :numeric, 4, 150],
               [:record_variant, :alpha, 1, 'A'],
@@ -75,6 +80,11 @@ module Clieop
               [:record_variant, :alpha, 1, 'B'],
               [:name, :alpha, 35],
             ],
+          :payment_city =>[
+              [:record_code, :numeric, 4, 173],
+              [:record_variant, :alpha, 1, 'B'],
+              [:city, :alpha, 35],
+            ],         
       }
 
       attr_accessor :definition, :data

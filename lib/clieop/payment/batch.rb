@@ -65,7 +65,11 @@ module Clieop
                             :to_account       => to_account,       :from_account => from_account).to_clieop
 
           # generate record with transaction information
-          batch_data << Clieop::Payment::Record.new(:invoice_name, :name => tr[:account_owner]).to_clieop if transaction_is_payment?
+          if transaction_is_payment?          
+            batch_data << Clieop::Payment::Record.new(:invoice_name, :name => tr[:account_owner]).to_clieop 
+            batch_data << Clieop::Payment::Record.new(:invoice_city, :city => tr[:account_city]).to_clieop unless tr[:account_city].nil? 
+          end
+            
           batch_data << Clieop::Payment::Record.new(:transaction_reference, :reference_number => tr[:reference_number]).to_clieop unless tr[:reference_number].nil?
 
           # split discription into lines and make a record for the first 4 lines
@@ -74,7 +78,11 @@ module Clieop
               batch_data << Clieop::Payment::Record.new(:transaction_description, :description => line.strip).to_s unless line == ''
             end
           end
-          batch_data << Clieop::Payment::Record.new(:payment_name, :name => tr[:account_owner]).to_clieop unless transaction_is_payment?
+          
+          unless transaction_is_payment?          
+            batch_data << Clieop::Payment::Record.new(:payment_name, :name => tr[:account_owner]).to_clieop 
+            batch_data << Clieop::Payment::Record.new(:payment_city, :city => tr[:account_city]).to_clieop unless tr[:account_city].nil?
+          end
 
         end
 

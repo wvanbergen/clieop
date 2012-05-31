@@ -36,6 +36,7 @@ describe Clieop::Payment::Batch do
           :reference_number => "Factnr 100101",
           :account_nr       => 123456789,
           :account_owner    => 'Payee',
+          :account_city     => 'Enschede',          
           :amount           => 30102,
           :description      => "Testing a CLIEOP direct debt transaction\nCharging your bank account",
           :transaction_type => 1001
@@ -49,6 +50,7 @@ describe Clieop::Payment::Batch do
         @batch.to_clieop.should  match(/0030B1000000Reciever                           P  /)
         @batch.to_clieop.should  match(/0100A100100000301020001234567890123456789         /)
         @batch.to_clieop.should  match(/0110BPayee                                        /)
+        @batch.to_clieop.should  match(/0113BEnschede                                     /)        
         @batch.to_clieop.should  match(/0150AFactnr 100101                                /)
         @batch.to_clieop.should  match(/0160ATesting a CLIEOP direct debt tra             /)
         @batch.to_clieop.should  match(/0160ACharging your bank account                   /)
@@ -74,6 +76,7 @@ describe Clieop::Payment::Batch do
           :reference_number => "Factnr 100101",
           :account_nr       => 123456789,
           :account_owner    => 'Payee',
+          :account_city     => 'Enschede',     
           :amount           => 30102,
           :description      => "Testing a CLIEOP direct credit transaction\nPaying your bank account",
           :transaction_type => 1001
@@ -90,6 +93,7 @@ describe Clieop::Payment::Batch do
         @batch.to_clieop.should  match(/0160ATesting a CLIEOP direct credit t             /)
         @batch.to_clieop.should  match(/0160APaying your bank account                     /)
         @batch.to_clieop.should  match(/0170BPayee                                        /)
+        @batch.to_clieop.should  match(/0173BEnschede                                     /)          
         @batch.to_clieop.should  match(/9990A00000000000301020002469135780000001          /)
       end
 
