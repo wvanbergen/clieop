@@ -1,5 +1,7 @@
 = CLIEOP
 
+{<img src="https://secure.travis-ci.org/wvanbergen/clieop.png?branch=master" alt="Build Status" />}[http://travis-ci.org/wvanbergen/clieop]
+
 This library is a pure Ruby implementation of the *CLIEOP03* format. Currently,
 it only supports writing CLIEOP files with accounts receivable transactions.
 Accounts payable transactions, and reading existing CLIEOP files is planned to be
