@@ -1,12 +1,12 @@
 module Clieop
   module Payment
-    
+
     class Batch
 
       attr_accessor :transactions, :batch_info
 
       def initialize(batch_info)
-        raise "Required: :description, :account_nr, :account_owner" unless ([:description, :account_nr, :account_owner] - batch_info.keys).empty?
+        raise "Required: :description, :account_nr, :account_owner" unless ([:account_nr, :account_owner] - batch_info.keys).empty?
         @transactions = []
         @batch_info = batch_info
       end
@@ -37,7 +37,9 @@ module Clieop
                           :serial_nr         => @batch_info[:serial_nr] || 1,
                           :currency          => @batch_info[:currency] || "EUR").to_clieop
 
-        batch_data << Clieop::Payment::Record.new(:batch_description, :description => @batch_info[:description]).to_clieop
+        unless @batch_info[:description].nil?
+          batch_data << Clieop::Payment::Record.new(:batch_description, :description => @batch_info[:description]).to_clieop
+        end
         batch_data << Clieop::Payment::Record.new(:batch_owner,
                           :process_date => @batch_info[:process_date] || 0,
                           :owner        => @batch_info[:account_owner]).to_clieop

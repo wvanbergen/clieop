@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Clieop::Payment::Batch do
 
   before(:all) do
-    @batch_info = {
-      :description   => "Batch",
+    @batch_info_without_description = {
       :account_nr    => 123456789,
       :account_owner => "Reciever"
     }
+    @batch_info = @batch_info_without_description.merge :description => 'Batch'
   end
 
   it "should generate valid object" do
@@ -18,6 +18,12 @@ describe Clieop::Payment::Batch do
     batch = Clieop::Payment::Batch.invoice_batch(@batch_info.dup)
     batch.class.should eql(Clieop::Payment::Batch)
     batch.batch_info[:transaction_group].should eql(10)
+  end
+
+  it 'should allow omitting a description' do
+    expect {
+      Clieop::Payment::Batch.invoice_batch(@batch_info_without_description)
+    }.to_not raise_error
   end
 
   it "should generate a payment batch" do
@@ -32,7 +38,7 @@ describe Clieop::Payment::Batch do
 
       before do
         @batch = Clieop::Payment::Batch.invoice_batch(@batch_info.dup)
-        @batch << {
+        @transaction = {
           :reference_number => "Factnr 100101",
           :account_nr       => 123456789,
           :account_owner    => 'Payee',
@@ -41,6 +47,7 @@ describe Clieop::Payment::Batch do
           :description      => "Testing a CLIEOP direct debt transaction\nCharging your bank account",
           :transaction_type => 1001
         }
+        @batch << @transaction
       end
 
       it "should add transactions to batch" do
@@ -55,6 +62,12 @@ describe Clieop::Payment::Batch do
         @batch.to_clieop.should  match(/0160ATesting a CLIEOP direct debt tra             /)
         @batch.to_clieop.should  match(/0160ACharging your bank account                   /)
         @batch.to_clieop.should  match(/9990A00000000000301020002469135780000001          /)
+      end
+
+      it 'should omit 0020 record when there is no descroption' do
+        batch = Clieop::Payment::Batch.invoice_batch(@batch_info_without_description)
+        batch << @transaction
+        batch.to_clieop.should_not match(/^0020/)
       end
 
       it "should appear in proper order" do
@@ -72,7 +85,7 @@ describe Clieop::Payment::Batch do
 
       before do
         @batch = Clieop::Payment::Batch.payment_batch(@batch_info.dup)
-        @batch << {
+        @transaction = {
           :reference_number => "Factnr 100101",
           :account_nr       => 123456789,
           :account_owner    => 'Payee',
@@ -81,6 +94,7 @@ describe Clieop::Payment::Batch do
           :description      => "Testing a CLIEOP direct credit transaction\nPaying your bank account",
           :transaction_type => 1001
         }
+        @batch << @transaction
       end
 
       it "should add transactions to batch" do
@@ -95,6 +109,12 @@ describe Clieop::Payment::Batch do
         @batch.to_clieop.should  match(/0170BPayee                                        /)
         @batch.to_clieop.should  match(/0173BEnschede                                     /)          
         @batch.to_clieop.should  match(/9990A00000000000301020002469135780000001          /)
+      end
+
+      it 'should omit 0020 record when there is no descroption' do
+        batch = Clieop::Payment::Batch.invoice_batch(@batch_info_without_description)
+        batch << @transaction
+        batch.to_clieop.should_not match(/^0020/)
       end
 
       it "should appear in proper order" do
