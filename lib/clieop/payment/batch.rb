@@ -36,10 +36,14 @@ module Clieop
                           :acount_nr         => @batch_info[:account_nr] || 0,
                           :serial_nr         => @batch_info[:serial_nr] || 1,
                           :currency          => @batch_info[:currency] || "EUR").to_clieop
-
-        unless @batch_info[:description].nil?
-          batch_data << Clieop::Payment::Record.new(:batch_description, :description => @batch_info[:description]).to_clieop
+        
+        # split batch discription into lines and make a record for the first 4 lines
+        unless @batch_info[:description].nil? || @batch_info[:description] == ''
+          @batch_info[:description].split(/\r?\n/)[0, 4].each do |line| # FIXME raise warning when line is longer than 32 chars/description longer than 4 lines
+            batch_data << Clieop::Payment::Record.new(:batch_description, :description => line.strip).to_s unless line == ''
+          end
         end
+                  
         batch_data << Clieop::Payment::Record.new(:batch_owner,
                           :process_date => @batch_info[:process_date] || 0,
                           :owner        => @batch_info[:account_owner]).to_clieop

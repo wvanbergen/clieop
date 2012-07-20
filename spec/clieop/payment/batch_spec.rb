@@ -7,6 +7,7 @@ describe Clieop::Payment::Batch do
       :account_nr    => 123456789,
       :account_owner => "Reciever"
     }
+    
     @batch_info = @batch_info_without_description.merge :description => 'Batch'
   end
 
@@ -64,11 +65,20 @@ describe Clieop::Payment::Batch do
         @batch.to_clieop.should  match(/9990A00000000000301020002469135780000001          /)
       end
 
-      it 'should omit 0020 record when there is no descroption' do
+      it 'should omit 0020 record when there is no description' do
         batch = Clieop::Payment::Batch.invoice_batch(@batch_info_without_description)
         batch << @transaction
         batch.to_clieop.should_not match(/^0020/)
       end
+      
+      it 'should allow multiline 0020 batch descriptions' do        
+        batch = Clieop::Payment::Batch.invoice_batch(@batch_info.merge(:description => "Test\nbatch\nfor\nmultiline\ndescriptions"))
+        batch.to_clieop.should      match(/0020ATest                                         /)
+        batch.to_clieop.should      match(/0020Abatch                                        /)
+        batch.to_clieop.should      match(/0020Afor                                          /)
+        batch.to_clieop.should      match(/0020Amultiline                                    /)
+        batch.to_clieop.should_not  match(/0020Adescriptions                                 /) # Max 4 lines   
+      end        
 
       it "should appear in proper order" do
         last_record_code = 0
@@ -111,11 +121,20 @@ describe Clieop::Payment::Batch do
         @batch.to_clieop.should  match(/9990A00000000000301020002469135780000001          /)
       end
 
-      it 'should omit 0020 record when there is no descroption' do
-        batch = Clieop::Payment::Batch.invoice_batch(@batch_info_without_description)
+      it 'should omit the 0020 batch description record when there is no description' do
+        batch = Clieop::Payment::Batch.payment_batch(@batch_info_without_description)
         batch << @transaction
         batch.to_clieop.should_not match(/^0020/)
       end
+      
+      it 'should allow multiline 0020 batch descriptions' do        
+        batch = Clieop::Payment::Batch.payment_batch(@batch_info.merge(:description => "Test\nbatch\nfor\nmultiline\ndescriptions"))
+        batch.to_clieop.should      match(/0020ATest                                         /)
+        batch.to_clieop.should      match(/0020Abatch                                        /)
+        batch.to_clieop.should      match(/0020Afor                                          /)
+        batch.to_clieop.should      match(/0020Amultiline                                    /)
+        batch.to_clieop.should_not  match(/0020Adescriptions                                 /) # Max 4 lines   
+      end      
 
       it "should appear in proper order" do
         last_record_code = 0
