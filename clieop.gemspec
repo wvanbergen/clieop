@@ -3,8 +3,8 @@ Gem::Specification.new do |s|
 
   # Do not set version and date yourself, this will be done automatically
   # by the gem release script.
-  s.version = "0.2.2"
-  s.date    = "2012-03-20"
+  s.version = "1.0.0"
+  s.date    = "2012-07-20"
 
   s.summary     = "A pure Ruby implementation to write CLIEOP files"
   s.description = "This library is a pure Ruby, MIT licensed implementation of the CLIEOP03 transaction format. CLIEOP03 can be used to communicate direct debt transactions with your (Dutch) bank."
