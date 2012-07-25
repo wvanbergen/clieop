@@ -107,6 +107,17 @@ describe Clieop::Payment::Batch do
         @batch << @transaction
       end
 
+      it 'should allow specifying amount in cents' do
+        batch_with_cents = Clieop::Payment::Batch.payment_batch(@batch_info.dup)
+        batch_with_euros = Clieop::Payment::Batch.payment_batch(@batch_info.dup)
+        transaction_in_cents = @transaction.dup
+        transaction_in_cents.delete(:amount)
+        transaction_in_cents[:amount_in_cents] = 3010200
+        batch_with_cents << transaction_in_cents
+        batch_with_euros << @transaction
+        batch_with_cents.to_clieop.should == batch_with_euros.to_clieop
+      end
+
       it "should add transactions to batch" do
         @batch.batch_info[:transaction_group].should eql(0)
         @batch.to_clieop.should  match(/0010B0001234567890001EUR                          /)

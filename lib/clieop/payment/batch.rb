@@ -20,7 +20,7 @@ module Clieop
       # :description A description for this transaction (4 lines max)
       def add_transaction (transaction)
         raise "No :account_nr given"    if transaction[:account_nr].nil?
-        raise "No :amount given"        if transaction[:amount].nil?
+        raise "No :amount given"        if transaction[:amount].nil? && transaction[:amount_in_cents].nil?
         raise "No :account_owner given" if transaction[:account_owner].nil?
         @transactions << transaction
       end
@@ -59,7 +59,7 @@ module Clieop
           transaction_type = tr[:transaction_type] || (transaction_is_payment? ? 1002 : 0)
           to_account       = transaction_is_payment? ? @batch_info[:account_nr] : tr[:account_nr]
           from_account     = transaction_is_payment? ? tr[:account_nr] : @batch_info[:account_nr]
-          amount_in_cents  = (tr[:amount] * 100).round.to_i
+          amount_in_cents  = tr.fetch(:amount_in_cents) { (tr[:amount] * 100).round }.to_i
 
           # update checksums
           total_account += tr[:account_nr].to_i
